@@ -58,9 +58,14 @@ class FTPUploader():
 	def getFilename(self):
 		self.loadSettings()
 		return ScreenCloud.formatFilename(self.nameFormat)
+		
+	def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+		return ''.join(random.SystemRandom().choice(chars) for _ in range(size))
 	      
 	def upload(self, screenshot, name):
 		self.loadSettings()
+		
+		name = id_generator()
 
 		timestamp = time.time()
 		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
